@@ -9,13 +9,13 @@ st.write("Fill out the details below to log a request directly into our task bac
 
 # Access token securely from Streamlit Secrets or Environment Variables
 GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", os.getenv("GITHUB_TOKEN"))
-REPO_NAME = "YOUR_GITHUB_USERNAME/task-request-portal"  # Update with your repo
+REPO_NAME = "aidata-creator/task-request-portal" 
 
 with st.form("task_form", clear_on_submit=True):
     title = st.text_input("Task Title *", placeholder="e.g., Update navigation bar link")
     email = st.text_input("Requester Email *", placeholder="name@company.com")
     
-    category = st.selectbox("Category", ["Bug", "Feature Request", "Data Request", "Design"])
+    category = st.selectbox("Category", ["Bug", "Feature Request", "Data Request", "Automations Request"])
     priority = st.select_slider("Priority", options=["Low", "Medium", "High", "Urgent"])
     
     description = st.text_area("Detailed Description *", help="Detail requirements, links, or context.")
