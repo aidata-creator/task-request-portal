@@ -18,7 +18,7 @@ with st.form("task_form", clear_on_submit=True):
     
     col1, col2 = st.columns(2)
     with col1:
-        category = st.selectbox("Category", ["Bug", "Feature Request", "Data Request", "Design", "Automations Request"])
+        category = st.selectbox("Category", ["Bug", "Feature Request", "Data Request",  "Automations Request"])
     with col2:
         priority = st.select_slider("Priority", options=["Low", "Medium", "High", "Urgent"])
     
