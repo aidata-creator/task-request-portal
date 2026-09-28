@@ -13,12 +13,13 @@ jobs:
         with:
           payload: |
             {
+              "text": "📌 *New Task Request Submitted*",
               "blocks": [
                 {
                   "type": "header",
                   "text": {
                     "type": "plain_text",
-                    "text": "📋 New Task Request Submitted",
+                    "text": "📌 New Task Request Submitted",
                     "emoji": true
                   }
                 },
@@ -42,7 +43,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Task Content & Details:*\nClick the task title link above to view full details on GitHub."
+                    "text": "Click the title link above to view full request details and attachments in GitHub."
                   }
                 }
               ]
