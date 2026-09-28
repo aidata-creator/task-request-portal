@@ -1,20 +1,52 @@
-name: Urgent Task Slack Alert
+name: Task Request Slack Alert
 
 on:
   issues:
-    types: [opened, labeled]
+    # Trigger ONLY when the issue is initially created
+    types: [opened]
 
 jobs:
   notify-slack:
-    if: contains(github.event.issue.labels.*.name, 'priority:urgent')
     runs-on: ubuntu-latest
     steps:
-      - name: Send Slack Alert
+      - name: Send Clean Slack Notification
         uses: slackapi/slack-github-action@v1.26.0
         with:
           payload: |
             {
-              "text": "🚨 *URGENT Task Submitted!*\n*Title:* <${{ github.event.issue.html_url }}|${{ github.event.issue.title }}>"
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "📋 New Task Request Submitted",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Task Title:*\n<${{ github.event.issue.html_url }}|${{ github.event.issue.title }}>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Ticket Reference:*\n#${{ github.event.issue.number }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Task Content & Details:*\n${{ toJSON(github.event.issue.body) }}"
+                  }
+                }
+              ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
