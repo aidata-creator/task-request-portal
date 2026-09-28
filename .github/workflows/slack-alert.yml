@@ -2,14 +2,13 @@ name: Task Request Slack Alert
 
 on:
   issues:
-    # Trigger ONLY when the issue is initially created
     types: [opened]
 
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Clean Slack Notification
+      - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.26.0
         with:
           payload: |
@@ -43,7 +42,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Task Content & Details:*\n${{ toJSON(github.event.issue.body) }}"
+                    "text": "*Task Content & Details:*\nClick the task title link above to view full details on GitHub."
                   }
                 }
               ]
